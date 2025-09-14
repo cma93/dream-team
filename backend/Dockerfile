@@ -28,13 +28,11 @@ ENV PATH="/code/.venv/bin:$PATH"
 
 # Install Playwright runtime libs with current package names, then browsers
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    fonts-unifont fonts-ubuntu ca-certificates \
-    libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0 \
-    libx11-6 libxcomposite1 libxdamage1 libxext6 libxfixes3 libxrandr2 \
-    libxkbcommon0 libdrm2 libgbm1 libasound2 libatspi2.0-0 \
-    libcups2 libpango-1.0-0 libcairo2 libxshmfence1 libxrender1 \
- && rm -rf /var/lib/apt/lists/*
-RUN python -m pip install --upgrade pip playwright && playwright install chromium
+    ca-certificates && rm -rf /var/lib/apt/lists/*
+
+RUN python -m pip install --upgrade pip playwright \
+ && playwright install-deps chromium \
+ && playwright install chromium
 
 # Expose the port that the app will run on
 EXPOSE 3100
