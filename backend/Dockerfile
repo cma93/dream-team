@@ -25,7 +25,6 @@ RUN uv lock && uv sync --no-dev
 
 # Place executables in the environment at the front of the path
 ENV PATH="/code/.venv/bin:$PATH"
-RUN playwright install --with-deps chromium
 
 # Install Playwright runtime libs with current package names, then browsers
 RUN apt-get update && apt-get install -y --no-install-recommends \
